@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 
 @Component({
 	components: {
-
+		PageControls: require('../utilities/PageControls.vue.html')
 	},
 	filters: {
 		currency(value:number) {

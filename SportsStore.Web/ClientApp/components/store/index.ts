@@ -39,5 +39,11 @@ export default new Vuex.Store({
 			state.pageSize = size;
 			state.currentPage = 1; //reset filter after page size
 		}
+	},
+	actions: {
+		setCurrentPage({ state, commit }, pageNumber) {
+			commit("setCurrentPage", pageNumber);
+		}
 	}
+
 })

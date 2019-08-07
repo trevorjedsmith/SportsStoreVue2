@@ -12,6 +12,7 @@
     <None Remove="ClientApp\components\sportsstore\ProductList.ts" />
     <None Remove="ClientApp\components\sportsstore\Store.ts" />
     <None Remove="ClientApp\components\store\index.ts" />
+    <None Remove="ClientApp\components\utilities\PageControls.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,7 @@
     <TypeScriptCompile Include="ClientApp\components\sportsstore\ProductList.ts" />
     <TypeScriptCompile Include="ClientApp\components\sportsstore\Store.ts" />
     <TypeScriptCompile Include="ClientApp\components\store\index.ts" />
+    <TypeScriptCompile Include="ClientApp\components\utilities\PageControls.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
