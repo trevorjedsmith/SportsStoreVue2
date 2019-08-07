@@ -20,6 +20,6 @@ export default class ProductListComponent extends Vue {
 
 
 	get products() {
-		return this.$store.state.products;
+		return this.$store.getters.processedProducts;
 	}
 }
