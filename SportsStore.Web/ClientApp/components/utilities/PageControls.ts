@@ -27,4 +27,8 @@ export default class PageControlsComponent extends Vue {
 	setCurrentPage(pageNum: number) {
 		this.$store.dispatch("setCurrentPage", pageNum);
 	}
+
+	changePageSize($event: any) {
+		this.$store.dispatch("setPageSize", $event.target.value)
+	}
 }

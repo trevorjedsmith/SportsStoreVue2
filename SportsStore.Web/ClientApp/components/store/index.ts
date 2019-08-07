@@ -43,6 +43,9 @@ export default new Vuex.Store({
 	actions: {
 		setCurrentPage({ state, commit }, pageNumber) {
 			commit("setCurrentPage", pageNumber);
+		},
+		setPageSize({ state, commit }, pageSize) {
+			commit("setPageSize", pageSize);
 		}
 	}
 

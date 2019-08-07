@@ -1,11 +1,22 @@
 ﻿<template>
-    <div v-if="pageCount > 1" class="text-right">
-        <div class="btn-group mx-2">
-            <button v-for="i in pageNumbers" v-bind:key="i" class="btn btn-outline-primary"
-                    v-bind:class="{'btn-primary text-white' : i == currentPage}"
-                    v-on:click="setCurrentPage(i)">
-                {{i}}
-            </button>
+    <div class="row mt-2">
+        <div class="form-group col">
+            <select class="form-control" v-on:change="changePageSize">
+                <option value="4">4 per page</option>
+                <option value="8">8 per page</option>
+                <option value="12">12 per page</option>
+            </select>
+        </div>
+        <div class="text-right col">
+            <div v-if="pageCount > 1" class="text-right">
+                <div class="btn-group mx-2">
+                    <button v-for="i in pageNumbers" v-bind:key="i" class="btn btn-outline-primary"
+                            v-bind:class="{'btn-primary text-white' : i == currentPage}"
+                            v-on:click="setCurrentPage(i)">
+                        {{i}}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
