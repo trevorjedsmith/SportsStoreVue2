@@ -29,5 +29,9 @@
     "vee-validate": "2.2.7",
     "axios": "0.18.0",
     "webpack-dev-middleware": "^1.8.4"
+  },
+  "scripts": {
+    "buildvendor": "webpack --config webpack.config.vendor.js",
+    "buildmain": "webpack --config webpack.config.js"
   }
 }
