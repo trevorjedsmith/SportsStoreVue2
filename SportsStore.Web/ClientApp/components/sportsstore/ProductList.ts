@@ -1,6 +1,7 @@
 ﻿import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { mapState } from "vuex";
+import { Product } from "../models/Product";
 
 @Component({
 	components: {
@@ -21,5 +22,10 @@ export default class ProductListComponent extends Vue {
 
 	get products() {
 		return this.$store.getters.processedProducts;
+	}
+
+	handleProductAdd(product: Product) {
+		this.$store.dispatch("setProduct", product);
+		this.$router.push("/cart");
 	}
 }

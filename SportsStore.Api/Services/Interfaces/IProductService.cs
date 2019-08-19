@@ -11,5 +11,6 @@ namespace SportsStoreVue.Api.Services.Interfaces
     {
         Task<IEnumerable<ProductDto>> GetProducts();
         Task<ProductDto> GetProduct(int id);
+        Task<IEnumerable<string>> GetCategories();
     }
 }

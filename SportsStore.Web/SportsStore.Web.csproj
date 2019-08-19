@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\cart\ShoppingCart.ts" />
+    <None Remove="ClientApp\components\cart\ShoppingCartLine.ts" />
+    <None Remove="ClientApp\components\models\Product.ts" />
     <None Remove="ClientApp\components\sportsstore\ProductList.ts" />
     <None Remove="ClientApp\components\sportsstore\Store.ts" />
     <None Remove="ClientApp\components\store\index.ts" />
@@ -25,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\cart\ShoppingCart.ts" />
+    <TypeScriptCompile Include="ClientApp\components\cart\ShoppingCartLine.ts" />
+    <TypeScriptCompile Include="ClientApp\components\models\Product.ts" />
     <TypeScriptCompile Include="ClientApp\components\sportsstore\ProductList.ts" />
     <TypeScriptCompile Include="ClientApp\components\sportsstore\Store.ts" />
     <TypeScriptCompile Include="ClientApp\components\store\index.ts" />

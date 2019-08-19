@@ -9,6 +9,9 @@
             </h4>
             <div class="card card-text bg-white p-1">
                 {{p.description}}
+                <button @click="handleProductAdd(p)" class="btn btn-success btn-sm float-right">
+                    Add To Cart <i class="fa fa-plus-circle"></i>
+                </button>
             </div>
         </div>
         <page-controls></page-controls>

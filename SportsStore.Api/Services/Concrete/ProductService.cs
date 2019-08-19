@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,15 @@ namespace SportsStore.Api.Services.Concrete
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<string>> GetCategories()
+        {
+            var categories =  await _context.Products.Select(x => x.Category)
+                                                       .Distinct()
+                                                    .ToListAsync();
+
+            return categories;
         }
 
         public async Task<ProductDto> GetProduct(int id)

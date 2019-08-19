@@ -16,7 +16,7 @@ export default class CategoryControlsComponent extends Vue {
 		return this.$store.getters.categories;
 	}
 
-	setCurrentCategory($event:any) {
-		this.$store.dispatch("setCurrentCategory", $event.target.value);
+	setCurrentCategory(category:string) {
+		this.$store.dispatch("setCurrentCategory", category);
 	}
 }

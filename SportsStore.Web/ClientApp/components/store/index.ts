@@ -1,31 +1,34 @@
 ﻿import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+
+// Internal
+import { Product, IProduct } from "../models/Product";
+
 Vue.use(Vuex);
 
+const baseUrl: string = 'http://localhost:49951/api';
+const productsUrl: string = `${baseUrl}/products`;
+const categoriesUrl: string = `${baseUrl}/products/getCategories`;
+const productsArray: Product[] = [];
+const lines: any[] = [];
+
+
 const testData = [];
-
-
-// Setting up mock products
-for (let i = 1; i <= 10; i++) {
-	testData.push({
-		id: i,
-		name: `Product #${i}`,
-		category: `Category ${i % 3}`,
-		description: `This is Product #${i}`,
-		price: i * 50
-	});
-}
 
 export default new Vuex.Store({
 	strict: true,
 	state: {
-		products: testData,
-		productsTotal: testData.length,
+		products: productsArray,
+		categories: [],
+		productsTotal: productsArray.length,
 		currentPage: 1,
 		pageSize: 4,
-		currentCategory: "All"
+		currentCategory: "All",
+		lines:lines
 	},
 	getters: {
+		// Product Getters
 		processedProducts: (state, getters) => {
 			let index = (state.currentPage - 1) * state.pageSize;
 			return getters.productsFilteredByCategory
@@ -36,17 +39,17 @@ export default new Vuex.Store({
 		pageCount: (state, getters) =>
 			Math.ceil(getters.productsFilteredByCategory.length / state.pageSize),
 		categories: state => {
-			let catArray = state.products.map(p => p.category);
-			let allExisits = catArray.find(c => c === "All");
-
-			if (!allExisits)
-				catArray.push("All");
-
-			return catArray.filter((item, index) =>
-				catArray.indexOf(item) === index).sort();
-		}			
+			return state.categories;
+		},
+		// Cart Getters
+		itemCount: state => state.lines.reduce((total: any, line: any) =>
+			total + line.quantity, 0),
+		totalPrice: state => state.lines.reduce((total: any, line: any) =>
+			total + (line.quantity * line.product.price),0),
+		
 	},
 	mutations: {
+		// Store Mutations
 		setCurrentPage(state, page) {
 			state.currentPage = page;
 		},
@@ -57,6 +60,32 @@ export default new Vuex.Store({
 		setCurrentCategory(state, category) {
 			state.currentCategory = category;
 			state.currentPage = 1;
+		},
+		setData(state, data:any) {
+			state.products = data.pData;
+			state.productsTotal = data.pData.length;
+
+			data.cData.push("All");
+				
+			state.categories = data.cData.sort();
+		},
+		// Cart Mutations
+		addProduct(state, product) {
+			let line = state.lines.find(line => line.product.id === product.id);
+			if (line != null) {
+				line.quantity++;
+			} else {
+				state.lines.push({ product: product, quantity: 1 });
+			}
+		},
+		changeQuantity(state, update) {
+			update.line.quantity = update.quantity;
+		},
+		removeProduct(state, lineToRemove) {
+			let index = state.lines.findIndex(line => line === lineToRemove);
+			if (index > -1) {
+				state.lines.splice(index, 1);
+			}
 		}
 	},
 	actions: {
@@ -68,6 +97,15 @@ export default new Vuex.Store({
 		},
 		setCurrentCategory({ state, commit }, category) {
 			commit("setCurrentCategory", category);
+		},
+		setProduct({ state, commit }, product: Product) {
+			commit("addProduct", product);
+		},
+		async getData(context) {
+			let pData = (await axios.get(productsUrl)).data;
+			let cData = (await axios.get(categoriesUrl)).data;
+
+			context.commit("setData", { pData, cData });
 		}
 	}
 

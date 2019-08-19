@@ -45,6 +45,12 @@ namespace SportsStore.Api.Controllers
             return Ok(product);
         }
 
+        [HttpGet("getCategories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            return Ok(await _productService.GetCategories());
+        }
+
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)
