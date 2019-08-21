@@ -79,7 +79,7 @@ export default new Vuex.Store({
 			}
 		},
 		changeQuantity(state, update) {
-			update.line.quantity = update.quantity;
+			update.line.quantity = update.qty;
 		},
 		removeProduct(state, lineToRemove) {
 			let index = state.lines.findIndex(line => line === lineToRemove);
@@ -89,6 +89,12 @@ export default new Vuex.Store({
 		}
 	},
 	actions: {
+		changeQuantity({ state, commit }, opts) {
+			commit("changeQuantity", opts);
+		},
+		removeLine({state, commit},lineToRemove) {
+			commit("removeProduct", lineToRemove);
+		},
 		setCurrentPage({ state, commit }, pageNumber) {
 			commit("setCurrentPage", pageNumber);
 		},
