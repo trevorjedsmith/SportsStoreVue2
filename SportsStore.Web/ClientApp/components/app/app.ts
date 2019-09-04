@@ -7,4 +7,10 @@ import { Component } from 'vue-property-decorator';
     }
 })
 export default class AppComponent extends Vue {
+
+	created() {
+		this.$store.dispatch("getData");
+		this.$store.dispatch("initialiseCart", this.$store);
+	}
 }
+

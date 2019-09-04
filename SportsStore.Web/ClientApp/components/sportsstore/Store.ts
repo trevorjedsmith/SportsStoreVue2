@@ -10,6 +10,7 @@ import { Component } from 'vue-property-decorator';
 export default class StoreComponent extends Vue {
 
 	created() {
-		this.$store.dispatch("getData");
+
+		
 	}
 }

@@ -16,7 +16,7 @@ const lines: any[] = [];
 
 const testData = [];
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
 	strict: true,
 	state: {
 		products: productsArray,
@@ -86,6 +86,10 @@ export default new Vuex.Store({
 			if (index > -1) {
 				state.lines.splice(index, 1);
 			}
+		},
+		setCartData(state, data) {
+			state.lines = [];
+			state.lines = data;
 		}
 	},
 	actions: {
@@ -107,6 +111,21 @@ export default new Vuex.Store({
 		setProduct({ state, commit }, product: Product) {
 			commit("addProduct", product);
 		},
+		// Persist Actions
+		loadCartData(context) {
+			let data = localStorage.getItem("cart");
+			if (data != null)
+				context.commit("setCartData", JSON.parse(data));
+		},
+		storeCartData(context) {
+			localStorage.setItem("cart", JSON.stringify(context.state.lines));
+		},
+		clearCartData(context) {
+			context.commit("setCartData",[]);
+		},
+		initialiseCart(context, store) {
+			context.dispatch("loadCartData");
+		},
 		async getData(context) {
 			let pData = (await axios.get(productsUrl)).data;
 			let cData = (await axios.get(categoriesUrl)).data;
@@ -116,3 +135,11 @@ export default new Vuex.Store({
 	}
 
 })
+
+store.subscribe((mutation, state) => {
+	console.log('Subscribe for store change')
+	localStorage.setItem("cart", JSON.stringify(state.lines));
+});
+
+
+export default store;
