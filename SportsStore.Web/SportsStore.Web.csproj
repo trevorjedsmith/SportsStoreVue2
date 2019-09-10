@@ -13,6 +13,7 @@
     <None Remove="ClientApp\components\cart\ShoppingCartLine.ts" />
     <None Remove="ClientApp\components\checkout\Checkout.ts" />
     <None Remove="ClientApp\components\checkout\OrderThanks.ts" />
+    <None Remove="ClientApp\components\models\Order.ts" />
     <None Remove="ClientApp\components\models\Product.ts" />
     <None Remove="ClientApp\components\sportsstore\ProductList.ts" />
     <None Remove="ClientApp\components\sportsstore\Store.ts" />
@@ -35,6 +36,7 @@
     <TypeScriptCompile Include="ClientApp\components\cart\ShoppingCartLine.ts" />
     <TypeScriptCompile Include="ClientApp\components\checkout\Checkout.ts" />
     <TypeScriptCompile Include="ClientApp\components\checkout\OrderThanks.ts" />
+    <TypeScriptCompile Include="ClientApp\components\models\Order.ts" />
     <TypeScriptCompile Include="ClientApp\components\models\Product.ts" />
     <TypeScriptCompile Include="ClientApp\components\sportsstore\ProductList.ts" />
     <TypeScriptCompile Include="ClientApp\components\sportsstore\Store.ts" />

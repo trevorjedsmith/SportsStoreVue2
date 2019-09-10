@@ -5,22 +5,53 @@
                 <div class="col bg-dark text-white"><a class="navbar-brand">SPORTS STORE</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div v-show="errors.items.length > 0" class="alert alert-danger">
+                        <ol>
+                            <li v-for="error in errors">{{ error.msg }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="m-2">
             <div class="form-group m-2">
                 <label>Name</label>
-                <input v-model="name" class="form-control "/>
+                <input v-model="order.name" v-validate="'required'" name="name" type="text" class="form-control">
+                <span class="text-danger">{{ errors.first('name') }}</span>
+            </div>
+            <div class="form-group m-2">
+                <label>Email</label>
+                <input v-model="order.email" v-validate="'required|email'" name="email" type="text" class="form-control">
+                <span class="text-danger">{{ errors.first('email') }}</span>
+            </div>
+            <div class="form-group m-2">
+                <label>Address</label>
+                <input v-model="order.address" v-validate="'required'" name="address" type="text" class="form-control">
+                <span class="text-danger">{{ errors.first('address') }}</span>
+            </div>
+            <div class="form-group m-2">
+                <label>City</label>
+                <input v-model="order.city" v-validate="'required'" name="city" type="text" class="form-control">
+                <span class="text-danger">{{ errors.first('city') }}</span>
+            </div>
+            <div class="form-group m-2">
+                <label>Zip</label>
+                <input v-model="order.zip" v-validate="'required'" name="zip" type="text" class="form-control">
+                <span class="text-danger">{{ errors.first('zip') }}</span>
             </div>
         </div>
         <div class="text-center">
             <router-link to="/cart" class="btn btn-secondary m-1">
-                Back
+                <i class="fa fa-backward"></i> Back
             </router-link>
             <button class="btn btn-primary m-1" v-on:click="submitOrder">
-                Place Order
+                Place Order <i class="fa fa-credit-card"></i>
             </button>
         </div>
     </div>
 </template>
 
 <script src="./Checkout.ts"></script>
+
