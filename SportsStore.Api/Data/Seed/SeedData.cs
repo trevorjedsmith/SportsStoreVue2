@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SportsStore.Api.Models.Entities;
 using System;
@@ -14,6 +15,9 @@ namespace SportsStoreVue.Api.Data.Seed
         {
             SportsStoreContext context = app.ApplicationServices
                 .GetRequiredService<SportsStoreContext>();
+
+            var userManager = app.ApplicationServices
+                .GetRequiredService<UserManager<IdentityUser>>();
             if (!context.Products.Any())
             {
                 context.Products.AddRange(
@@ -82,6 +86,19 @@ namespace SportsStoreVue.Api.Data.Seed
                     }
                 );
                 context.SaveChanges();
+            }
+
+            if (userManager.FindByEmailAsync("trevor_jed_smith@hotmail.com").GetAwaiter().GetResult() == null)
+            {
+                var user = new IdentityUser
+                {
+                    UserName = "trevor_jed_smith@hotmail.com",
+                    Email = "trevor_jed_smith@hotmail.com",
+                    EmailConfirmed = true,
+                    LockoutEnabled = false
+                };
+                userManager.CreateAsync(user,
+                "Password@123").GetAwaiter().GetResult();
             }
         }
     }
