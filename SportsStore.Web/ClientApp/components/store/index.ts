@@ -25,7 +25,10 @@ const store = new Vuex.Store({
 		currentPage: 1,
 		pageSize: 4,
 		currentCategory: "All",
-		lines:lines
+		lines: lines,
+		//Auth
+		authenticated: false,
+		jwt:null
 	},
 	getters: {
 		// Product Getters
@@ -45,7 +48,15 @@ const store = new Vuex.Store({
 		itemCount: state => state.lines.reduce((total: any, line: any) =>
 			total + line.quantity, 0),
 		totalPrice: state => state.lines.reduce((total: any, line: any) =>
-			total + (line.quantity * line.product.price),0),
+			total + (line.quantity * line.product.price), 0),
+		// Auth Getters
+		authenticatedAxios(state) {
+			return axios.create({
+				headers: {
+					"Authorization": `Bearer ${state.jwt}`
+				}
+			})
+		}
 		
 	},
 	mutations: {
@@ -90,6 +101,15 @@ const store = new Vuex.Store({
 		setCartData(state, data) {
 			state.lines = [];
 			state.lines = data;
+		},
+		// Auth Mutations
+		setAuthenticated(state, header) {
+			state.jwt = header;
+			state.authenticated = true;
+		},
+		clearAuthentication(state) {
+			state.authenticated = false;
+			state.jwt = null;
 		}
 	},
 	actions: {
@@ -131,6 +151,13 @@ const store = new Vuex.Store({
 			let cData = (await axios.get(categoriesUrl)).data;
 
 			context.commit("setData", { pData, cData });
+		},
+		async authenticate(context, credentials) {
+			let response = await axios.post(`/api/token`,
+				credentials);
+			if (response.data.success == true) {
+				context.commit("setAuthenticated", response.data.accessToken);
+			}
 		}
 	}
 
