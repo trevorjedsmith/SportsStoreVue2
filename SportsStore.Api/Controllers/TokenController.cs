@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 namespace SportsStore.Api.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class TokenController:Controller
     {       
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -27,15 +28,16 @@ namespace SportsStore.Api.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetToken([FromBody] LoginViewModel lvm)
+        [HttpPost("gettoken")]
+
+        public async Task<IActionResult> GetToken(LoginViewModel lvm)
         {
             var errorMessage = "Invalid e-mail address and/or password";
 
             if (!ModelState.IsValid)
                 return BadRequest(errorMessage);
 
-            var user = await _userManager.FindByEmailAsync(lvm.Email);
+            var user = await _userManager.FindByEmailAsync(lvm.Username);
 
             if (user == null)
                 return BadRequest(errorMessage);

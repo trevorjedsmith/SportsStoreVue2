@@ -22,7 +22,8 @@ const routes = [
 	{ path: '/cart', component: require('./components/cart/ShoppingCart.vue.html') },
 	{ path: '/checkout', component: require('./components/checkout/Checkout.vue.html') },
 	{ path: '/thanks/:id', component: require('./components/checkout/OrderThanks.vue.html') },
-    { path: '/counter', component: require('./components/counter/counter.vue.html') },
+	{ path: '/login', component: require('./components/admin/Authentication.vue.html') },
+	{ path: '/admin', component: require('./components/admin/Admin.vue.html') },
     { path: '/fetchdata', component: require('./components/fetchdata/fetchdata.vue.html') }
 ];
 // Vue Instance

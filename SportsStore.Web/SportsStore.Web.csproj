@@ -9,10 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\admin\Admin.ts" />
+    <None Remove="ClientApp\components\admin\Authentication.ts" />
     <None Remove="ClientApp\components\cart\ShoppingCart.ts" />
     <None Remove="ClientApp\components\cart\ShoppingCartLine.ts" />
     <None Remove="ClientApp\components\checkout\Checkout.ts" />
     <None Remove="ClientApp\components\checkout\OrderThanks.ts" />
+    <None Remove="ClientApp\components\models\LoginViewModel.ts" />
     <None Remove="ClientApp\components\models\Order.ts" />
     <None Remove="ClientApp\components\models\Product.ts" />
     <None Remove="ClientApp\components\sportsstore\ProductList.ts" />
@@ -32,10 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\admin\Admin.ts" />
+    <TypeScriptCompile Include="ClientApp\components\admin\Authentication.ts" />
     <TypeScriptCompile Include="ClientApp\components\cart\ShoppingCart.ts" />
     <TypeScriptCompile Include="ClientApp\components\cart\ShoppingCartLine.ts" />
     <TypeScriptCompile Include="ClientApp\components\checkout\Checkout.ts" />
     <TypeScriptCompile Include="ClientApp\components\checkout\OrderThanks.ts" />
+    <TypeScriptCompile Include="ClientApp\components\models\LoginViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\components\models\Order.ts" />
     <TypeScriptCompile Include="ClientApp\components\models\Product.ts" />
     <TypeScriptCompile Include="ClientApp\components\sportsstore\ProductList.ts" />

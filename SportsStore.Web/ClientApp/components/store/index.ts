@@ -153,7 +153,7 @@ const store = new Vuex.Store({
 			context.commit("setData", { pData, cData });
 		},
 		async authenticate(context, credentials) {
-			let response = await axios.post(`/api/token`,
+			let response = await axios.post(`${baseUrl}/token/gettoken`,
 				credentials);
 			if (response.data.success == true) {
 				context.commit("setAuthenticated", response.data.accessToken);
